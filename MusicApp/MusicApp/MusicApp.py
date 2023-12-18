@@ -1,36 +1,39 @@
+#goal make a piano that will take in the number buttons and play notes
+#ex 1->A, 2->B, ect
+#step 1) make a way to play each note
+#setp 2) 
+
+#from re import A
 import numpy as np
 import sounddevice as sd
 
-def play_note(note, duration, amplitude=0.3):
-    # Define the frequency of the note
-    frequency = 440.0 * 2**(note/12.0)
+import numpy as np
+import sounddevice as sd
 
-    # Generate the time values for the specified duration
-    t = np.linspace(0, duration, int(duration * 44100), endpoint=False)
+def generate_frequency(frequency, duration, samplerate=44100, amplitude=0.3):
 
     # Generate the audio signal for the note
+    t = np.linspace(0, duration, int(duration * samplerate), endpoint=False)
     signal = amplitude * np.sin(2 * np.pi * frequency * t)
 
-    # Play the audio signal
-    sd.play(signal, samplerate=44100)
+    return signal
+
+def play(note):
+    sd.play(note, samplerate=44100)
     sd.wait()
 
-# Play A note at 440 Hz for 1 second
-play_note(note=0, duration=1)
-play_note(note=0, duration=1)
-play_note(note=5, duration=1)
-play_note(note=5, duration=1)
-play_note(note=7, duration=1)
-play_note(note=7, duration=1)
-play_note(note=5, duration=2)
+# Define note
+A= generate_frequency(220, duration=1)
+B= generate_frequency(246.94, duration=1)
+C= generate_frequency(261.63, duration=1)
+D= generate_frequency(293.66, duration=1)
+E= generate_frequency(329.63, duration=1)
+F= generate_frequency(349.23, duration=1)
+G= generate_frequency(392, duration=1)
 
-play_note(note=3, duration=1)
-play_note(note=3, duration=1)
-play_note(note=2, duration=1)
-play_note(note=2, duration=1)
-play_note(note=1, duration=1)
-play_note(note=1, duration=1)
-play_note(note=0, duration=2)
+
+play(G)
+play(A)
 
 
 
